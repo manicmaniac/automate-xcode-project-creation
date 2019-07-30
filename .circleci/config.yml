@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    macos:
+      xcode: "10.2.1"
+    steps:
+      - checkout
+      - run:
+          command: make
