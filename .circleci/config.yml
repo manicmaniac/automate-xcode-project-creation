@@ -20,9 +20,6 @@ jobs:
           paths:
             - /usr/local/Homebrew
       - run:
-          name: Set Xcode user
-          command: defaults write com.apple.Xcode PBXCustomTemplateMacroDefinitions '{FULLUSERNAME="John Doe";}'
-      - run:
           name: Create Xcode project
           command: |
             xcnew -n Organization -i com.example -t Example Example
