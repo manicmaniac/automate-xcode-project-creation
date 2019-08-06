@@ -5,11 +5,18 @@ jobs:
       xcode: "10.2.1"
     steps:
       - checkout
+      - restore_cache:
+          key: homebrew-v1-
       - run:
           name: Install xcnew
           command: |
             brew tap manicmaniac/tap
             brew install xcnew
+            brew cleanup
+      - save_cache:
+          key: homebrew-v1-{{ epoch }}
+          paths:
+            - /usr/local/Homebrew
       - run:
           name: Create Xcode project
           command: |
