@@ -6,4 +6,17 @@ jobs:
     steps:
       - checkout
       - run:
-          command: make
+          name: Install xcnew
+          command: |
+            brew tap manicmaniac/tap
+            brew install xcnew
+      - run:
+          name: Create Xcode project
+          command: |
+            perl -pi -e 's/(?<=IPHONEOS_DEPLOYMENT_TARGET = )[0-9.]+/11.0/g' Example/Example.xcodeproj/project.pbxproj
+            perl -pi -e 's/(?<=CODE_SIGN_STYLE = )Automatic/Manual/g' Example/Example.xcodeproj/project.pbxproj
+            curl -o Example/.gitignore https://raw.githubusercontent.com/github/gitignore/master/Swift.gitignore
+            git init Example
+            git add .
+      - store_artifacts:
+          path: Example
