@@ -31,5 +31,9 @@ jobs:
             curl -o Example/.gitignore https://raw.githubusercontent.com/github/gitignore/master/Swift.gitignore
             git init Example
             git add .
+      - run:
+          name: Archive Xcode project
+          command: |
+            tar zcvf Example.tar.gz Example
       - store_artifacts:
-          path: Example
+          path: Example.tar.gz
