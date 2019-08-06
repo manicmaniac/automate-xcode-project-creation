@@ -3,6 +3,8 @@ jobs:
   build:
     macos:
       xcode: "10.2.1"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - checkout
       - restore_cache:
