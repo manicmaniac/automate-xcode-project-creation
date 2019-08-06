@@ -22,6 +22,7 @@ jobs:
       - run:
           name: Create Xcode project
           command: |
+            xcnew -n Organization -i com.example -t Example Example
             perl -pi -e 's/(?<=IPHONEOS_DEPLOYMENT_TARGET = )[0-9.]+/11.0/g' Example/Example.xcodeproj/project.pbxproj
             perl -pi -e 's/(?<=CODE_SIGN_STYLE = )Automatic/Manual/g' Example/Example.xcodeproj/project.pbxproj
             curl -o Example/.gitignore https://raw.githubusercontent.com/github/gitignore/master/Swift.gitignore
