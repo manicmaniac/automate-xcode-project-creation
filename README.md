@@ -10,7 +10,7 @@ Unfortunately, there's no built-in support to create Xcode project programatical
 
 Since somehow I need to do it, I tried with a couple of approches.
 
-1. Use OSA events
+### 1. Use OSA events
 
 Firstly I tried to manipulate Xcode by sending OSA events to Xcode via AppleScript language.
 
@@ -18,7 +18,7 @@ The code is [here](https://github.com/manicmaniac/automate-xcode-project-creatio
 
 It worked on my local machine but another problem raised.
 
-- Can't run on CI
+#### Can't run on CI
 
 By default, MacOS forbids any applications to receive OSA events so I had to enable this feature.
 
@@ -27,14 +27,14 @@ Actually there's a way to enable it programatically, by modifying `/Library/Appl
 However, MacOS has introduced SIP (System Integrity Protection) since High Sierra.
 This prevents users, which includes even superusers, from modifying TCC.db unless it is disabled by rebooting OS in safe mode.
 
-- Too slow and randomly fails
+#### Too slow and randomly fails
 
 Basically GUI scripting with AppleScript needs a lot of `delay`s to wait anything like opening the next window, alert dialong, file selection dialong and so on.
 I have to assume a low-spec machine and expect to be in the worst condition in order to set `delay` times otherwise the script fails randomly.
 
 For the above reasons, this choice didn't make it.
 
-2. Use Xcode private frameworks
+### 2. Use Xcode private frameworks
 
 Secondly I tried using Xcode's private frameworks named `DVTFoundation` and `IDEFoundation` to achive the goal.
 
