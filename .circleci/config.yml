@@ -10,19 +10,17 @@ jobs:
       - run:
           name: Install xcnew
           command: |
-            brew tap manicmaniac/tap
-            brew install xcnew
-            brew cleanup
+            brew install manicmaniac/tap/xcnew
       - run:
           name: Create Xcode project
           command: |
             xcnew -n Organization -i com.example -t Example Example
-            find Example -type f -name '*.swift' -exec perl -pi -e 's/Distiller/John Doe/g' {} \;
+            find Example -type f -name '*.swift' -exec sed -i '' 's/Distiller/John Doe/g' {} \;
             perl -pi -e 's/(?<=IPHONEOS_DEPLOYMENT_TARGET = )[0-9.]+/11.0/g' Example/Example.xcodeproj/project.pbxproj
             perl -pi -e 's/(?<=CODE_SIGN_STYLE = )Automatic/Manual/g' Example/Example.xcodeproj/project.pbxproj
             curl -Lso Example/.gitignore https://raw.githubusercontent.com/github/gitignore/master/Swift.gitignore
             git init Example
-            git add .
+            cd Example && git add .
       - run:
           name: Archive Xcode project
           command: |
